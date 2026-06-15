@@ -1,6 +1,6 @@
 # 🛒 Laporan Big Data Segmentasi Pelanggan E-Commerce Menggunakan Algoritma K-Means Clustering
 
-**UAS Big Data - Kelas A/B**
+**UAS Big Data - Kelas A**
 * Ahmad Zayn Usman (2310511001)
 * Fandi Yakub (2310511005)
 * Fauzio Yunus Alim (2310511020)
