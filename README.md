@@ -15,6 +15,7 @@ Hasil pembersihan data menghasilkan 2.199.819 baris transaksi siap latih dengan 
 ---
 
 ## ⚙️ Metode (Pipeline Big Data)
+![Flowchart Arsitektur Big Data](assets/flowchart_arsitektur.png)
 Tahapan eksperimen dan pemrosesan dalam arsitektur Big Data ini dijalankan menggunakan komputasi awan Google Colab yang diintegrasikan dengan Google Drive.
 1. **Extract:** Penarikan 1 juta baris *Synthetic U.S. E-Commerce Dataset* secara otomatis menggunakan Kaggle API.
 2. **Transform (Data Cleansing & Engineering):** Penanganan nilai kosong (*missing values*), eliminasi data ganda, rekayasa fitur waktu dan finansial, serta *downcasting* tipe data untuk optimasi RAM.
