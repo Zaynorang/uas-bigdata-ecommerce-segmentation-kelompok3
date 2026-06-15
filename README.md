@@ -35,6 +35,8 @@ Tahapan eksperimen dan pemrosesan dalam arsitektur Big Data ini dijalankan mengg
 
 ### 2. Data Descriptive
 * **Tren Waktu:** Terjadi lonjakan pesanan yang sangat signifikan (menembus 300.000 transaksi) pada bulan ke-11 (November) dan ke-12 (Desember), mengindikasikan tingginya interaksi saat kampanye diskon liburan akhir tahun (*holiday season*).
+![Distribusi Volume Transaksi](assets/distribusi_transaksi.png)
+
 * **Kategori Produk Dominan:** Tiga komoditas dengan volume penjualan tertinggi secara berturut-turut adalah *electronics* (~700.000 penjualan), *fashion*, dan *home goods*.
 
 ### 3. Diagnostic & Predictive Modeling
