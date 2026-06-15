@@ -8,62 +8,59 @@
 ---
 
 ## 📄 Abstrak
-[cite_start]Pertumbuhan pesat industri e-commerce menghasilkan lonjakan volume data transaksi harian yang masif dan terus terakumulasi[cite: 35, 78]. [cite_start]Skala Big Data ini menyulitkan sistem basis data konvensional untuk memproses dan mengekstraksi wawasan berharga secara efisien[cite: 36, 79]. [cite_start]Tanpa arsitektur analitik yang memadai, perusahaan kehilangan kemampuan mendeteksi anomali, meramalkan tren penjualan, serta mencegah perpindahan pelanggan (churn)[cite: 38, 84]. 
+Pertumbuhan pesat industri e-commerce telah menghasilkan lonjakan volume data transaksi harian yang sangat masif. Kumpulan data berskala besar ini mengakibatkan sistem manajemen basis data konvensional kesulitan untuk memproses dan mengekstraksi wawasan berharga secara efisien. Tanpa adanya arsitektur analitik yang memadai, perusahaan kehilangan kemampuan untuk mendeteksi anomali, meramalkan tren, serta mencegah perpindahan pelanggan (churn). Sebagai solusi dari fenomena tersebut, proyek ini mengimplementasikan alur pemrosesan analitik Big Data menggunakan *Synthetic U.S. E-Commerce Dataset* yang berisi jutaan baris data transaksi. Tahapan dimulai dari ekstraksi, transformasi memori skala besar (downcasting), hingga pemodelan *Machine Learning* tanpa pengawasan (*Unsupervised Learning*).
 
-[cite_start]Sebagai solusi, proyek ini mengimplementasikan alur pemrosesan analitik Big Data menggunakan *Synthetic U.S. E-Commerce Dataset* yang berisi jutaan baris pesanan[cite: 43]. [cite_start]Proses mencakup ekstraksi data, transformasi skala besar untuk menangani anomali, serta pemodelan Machine Learning *unsupervised*[cite: 44, 121].
-
-[cite_start]Hasil dari proses pembersihan menyisakan lebih dari 2,19 juta baris data transaksi siap latih[cite: 178]. [cite_start]Analisis deskriptif menemukan dominasi penjualan pada kategori elektronik [cite: 211, 504] [cite_start]dan lonjakan volume pada akhir tahun (November-Desember)[cite: 188, 505]. [cite_start]Pemodelan K-Means berhasil mengidentifikasi 4 klaster optimal[cite: 507]. [cite_start]Segmentasi ini membagi pelanggan menjadi Pelanggan VIP, Loyal, Reguler, dan Pasif[cite: 486, 488, 490, 492]. [cite_start]Penemuan ini menghasilkan rekomendasi strategis aplikatif untuk menjaga retensi pelanggan berharga dan mendistribusikan promosi terarah guna mencegah pelanggan pasif meninggalkan platform[cite: 513].
+Hasil pembersihan data menghasilkan 2.199.819 baris transaksi siap latih dengan integritas tinggi (tanpa duplikasi). Analisis deskriptif menemukan dominasi penjualan pada kategori barang elektronik dan lonjakan aktivitas belanja pada akhir tahun. Melalui pemodelan K-Means Clustering, pelanggan berhasil disegmentasi ke dalam 4 klaster optimal berdasarkan total pembelanjaan, kuantitas barang, dan frekuensi transaksi. Keempat segmen tersebut adalah Pelanggan VIP, Loyal, Reguler, dan Pasif. Pemetaan profil ini memberikan rekomendasi strategis dan aplikatif bagi platform untuk mempertahankan retensi pelanggan VIP serta mendistribusikan promosi terarah guna mencegah pelanggan pasif meninggalkan platform.
 
 ---
 
 ## ⚙️ Metode (Pipeline Big Data)
-[cite_start]Tahapan percobaan dalam arsitektur sistem Big Data ini dijalankan menggunakan lingkungan komputasi Google Colab yang diintegrasikan dengan Google Drive untuk efisiensi penyimpanan[cite: 73, 88].
-1. [cite_start]**Extract:** Penarikan 1 juta baris *Synthetic U.S. E-Commerce Dataset* secara otomatis menggunakan Kaggle API[cite: 72, 86].
-2. [cite_start]**Transform (Data Cleansing & Engineering):** Penanganan *missing values*, eliminasi duplikasi, rekayasa fitur waktu dan finansial, serta *downcasting* tipe data untuk optimasi RAM[cite: 92, 93, 94, 95].
-3. [cite_start]**Load:** Pemuatan dan penyimpanan DataFrame bersih ke dalam format `.parquet` di *cloud storage*[cite: 98].
-4. [cite_start]**Exploratory Data Analysis (EDA):** Analisis univariat, bivariat, dan multivariat (matriks korelasi) untuk mengekstraksi pola transaksi awal[cite: 106, 116].
-5. [cite_start]**Modeling (K-Means):** Standardisasi fitur menggunakan `StandardScaler` [cite: 126][cite_start], penentuan klaster optimal dengan *Elbow Method* [cite: 138][cite_start], dan pelatihan model K-Means Clustering[cite: 121].
+Tahapan eksperimen dan pemrosesan dalam arsitektur Big Data ini dijalankan menggunakan komputasi awan Google Colab yang diintegrasikan dengan Google Drive.
+1. **Extract:** Penarikan 1 juta baris *Synthetic U.S. E-Commerce Dataset* secara otomatis menggunakan Kaggle API.
+2. **Transform (Data Cleansing & Engineering):** Penanganan nilai kosong (*missing values*), eliminasi data ganda, rekayasa fitur waktu dan finansial, serta *downcasting* tipe data untuk optimasi RAM.
+3. **Load:** Pemuatan dan ekspor *DataFrame* bersih ke dalam format `.parquet` di *cloud storage*.
+4. **Exploratory Data Analysis (EDA):** Pembuatan visualisasi univariat, bivariat, dan multivariat (matriks korelasi) untuk mengekstraksi pola awal data transaksi.
+5. **Modeling (K-Means Clustering):** Standardisasi skala fitur numerik menggunakan `StandardScaler`, evaluasi pencarian jumlah klaster optimal melalui *Elbow Method*, dan pelatihan model sentroid K-Means.
 
 ---
 
 ## 📊 Hasil Analisis
 
 ### 1. Data Quality
-* [cite_start]**Integritas Tinggi:** Tidak ditemukan adanya baris transaksi yang ganda (0 baris duplikat)[cite: 173, 502].
-* [cite_start]**Missing Values Logis:** Terdapat 6,62% data kosong pada kolom `order_delivered_carrier_date` dan `order_delivered_customer_date`[cite: 154, 155]. [cite_start]Hal ini wajar karena merepresentasikan pesanan yang belum dikirim atau dibatalkan[cite: 157]. [cite_start]Fitur ini diabaikan dalam pemodelan karena tidak esensial[cite: 176].
-* [cite_start]**Dimensi Akhir:** Dataset siap latih berjumlah 2.199.819 baris transaksi[cite: 178].
+* **Integritas Tinggi:** Tidak ditemukan adanya baris transaksi yang ganda (0 baris duplikat).
+* **Missing Values Logis:** Terdapat 6,62% data kosong pada kolom `order_delivered_carrier_date` dan `order_delivered_customer_date`. Hal ini logis dan merepresentasikan pesanan yang belum dikirim atau dibatalkan. Baris data ini tidak dibuang karena fitur logistik tersebut tidak digunakan sebagai variabel pembentuk klaster.
+* **Dimensi Akhir:** Dataset siap latih dan analisis berjumlah 2.199.819 baris transaksi.
 
 ### 2. Data Descriptive
-* [cite_start]**Tren Waktu:** Terjadi lonjakan pesanan yang sangat drastis menembus 300.000 transaksi pada bulan November dan Desember (periode *holiday season* / *Black Friday*)[cite: 188, 189].
-* [cite_start]**Produk Dominan:** Kategori komoditas yang merajai pangsa pasar adalah *electronics* (hampir 700.000 penjualan), disusul *fashion* dan *home goods*[cite: 211].
-* [cite_start]**Anomali Nilai:** Terdapat pencilan (*outlier*) bernilai ekstrem di mana satu transaksi bisa bernilai hingga di atas 10.000 USD dengan kuantitas barang yang sedikit (1-2 barang), mengindikasikan pembelian barang elektronik *high-end*[cite: 236, 237, 254].
+* **Tren Waktu:** Terjadi lonjakan pesanan yang sangat signifikan (menembus 300.000 transaksi) pada bulan ke-11 (November) dan ke-12 (Desember), mengindikasikan tingginya interaksi saat kampanye diskon liburan akhir tahun (*holiday season*).
+* **Kategori Produk Dominan:** Tiga komoditas dengan volume penjualan tertinggi secara berturut-turut adalah *electronics* (~700.000 penjualan), *fashion*, dan *home goods*.
 
 ### 3. Diagnostic & Predictive Modeling
-* [cite_start]Berdasarkan grafik *Elbow Method*, patahan kurva melandai secara drastis pada titik $k=4$, sehingga jumlah klaster optimal ditetapkan sebanyak 4 segmen[cite: 449].
-* [cite_start]Model K-Means Clustering dengan $k=4$ berhasil memisahkan data dengan baik, divalidasi oleh *Silhouette Score* sebesar 0.3389 dan *Davies-Bouldin Index* di angka 1.0496[cite: 508].
+* **Deteksi Pencilan (Outlier):** Distribusi nominal belanja mayoritas berada di bawah 4.000 USD, namun terdapat transaksi bernilai ekstrem menembus 10.000 USD (indikasi pembelian barang *high-end*). Pencilan ekstrem ini dieliminasi batas batas kuartilnya sebelum pemodelan agar sentroid tidak bergeser secara bias.
+* **Evaluasi Model:** Patahan kurva *Elbow Method* melandai drastis pada titik $k=4$, sehingga jumlah klaster optimal ditetapkan 4. Validasi kinerja model K-Means ($k=4$) mencatatkan separasi yang memadai dengan *Silhouette Score* sebesar 0.3389 dan *Davies-Bouldin Index* di angka 1.0496.
 
 ---
 
-## 💡 Insight & Actionable Strategy (Tindak Lanjut Bisnis)
-Dari hasil diagnosis *centroid* klaster K-Means, berikut adalah karakteristik 4 segmen pelanggan beserta tindakan strategis bisnisnya:
+## 💡 Insight & Tindak Lanjut Bisnis (Actionable Strategy)
+Dari hasil diagnosis pusat klaster (*centroid*), model memetakan pelanggan ke dalam 4 segmen spesifik. Berikut adalah karakteristik dan rekomendasi tindakan strategis (*actionable*) berbasis data:
 
 * 👑 **Klaster 1: Pelanggan VIP / Sultan**
-  * [cite_start]**Pola:** Pengeluaran belanja sangat tinggi (rata-rata 6.677,62 USD), membeli barang paling banyak, dan frekuensi sangat sering[cite: 487].
-  * [cite_start]**Actionable Insight:** Berikan layanan eksklusif seperti *Personal Shopper*, gratis ongkos kirim tanpa batas, atau akses prioritas (Eksklusif VIP) untuk barang elektronik *high-end* yang baru rilis guna menjaga loyalitas absolut mereka[cite: 513].
+  * **Pola:** Daya beli sangat tinggi (rata-rata 6.677,62 USD), membeli kuantitas barang paling banyak (15,92 barang), dan frekuensi transaksi sangat sering (7,04 kali).
+  * **Tindak Lanjut Bisnis:** Tingkatkan kualitas layanan eksklusif. Berikan akses prioritas pembelian (*early access*) untuk peluncuran barang elektronik kelas atas (*high-end*) terbaru dan layanan dukungan pelanggan khusus tanpa antre guna memastikan loyalitas absolut mereka tetap terjaga.
 
 * 🤝 **Klaster 2: Pelanggan Loyal / Setia**
-  * [cite_start]**Pola:** Konsisten berbelanja dengan total pengeluaran cukup besar (5.019,63 USD) dan frekuensi kedatangan tinggi[cite: 489].
-  * **Actionable Insight:** Implementasikan strategi *Cross-Selling*. Mengingat mereka suka belanja barang kategori *electronics* dan *fashion*, rekomendasikan produk aksesori pelengkap dengan bundel harga khusus.
+  * **Pola:** Menjadi mesin penggerak volume operasional utama dengan konsistensi belanja di angka 5.019,63 USD dan frekuensi kedatangan 4,75 kali.
+  * **Tindak Lanjut Bisnis:** Implementasikan strategi *Cross-Selling*. Rekomendasikan produk-produk komplementer (seperti aksesori tambahan untuk kategori *electronics* atau *fashion*) dengan harga *bundling* khusus untuk sedikit demi sedikit meningkatkan total keranjang belanja mereka.
 
 * 🛒 **Klaster 0: Pelanggan Reguler / Menengah**
-  * [cite_start]**Pola:** Merupakan kelompok mayoritas dengan nilai belanja wajar (2.857,33 USD) dan frekuensi standar[cite: 491].
-  * **Actionable Insight:** Tingkatkan metrik frekuensi transaksi mereka dengan memberikan promosi *cashback* bersyarat atau program "Kumpulkan Poin" untuk menaikkan level mereka ke Klaster Loyal. 
+  * **Pola:** Kelompok konsumen mayoritas dengan intensitas dan nominal belanja rata-rata yang wajar (2.857,33 USD).
+  * **Tindak Lanjut Bisnis:** Percepat frekuensi transaksi mereka dari sekadar reguler menjadi loyal dengan mendistribusikan kupon *cashback* bersyarat atau program loyalitas (poin). Berikan *rewards* ketika mereka berhasil mencapai batas belanja (target minimal pembelian) tertentu setiap bulannya.
 
 * ⚠️ **Klaster 3: Pelanggan Pasif / Risiko Churn**
-  * [cite_start]**Pola:** Daya beli sangat minim (hanya 1.337,80 USD) dan frekuensi kedatangan paling jarang[cite: 493].
-  * [cite_start]**Actionable Insight:** Cegah mereka berpindah ke platform kompetitor (*churn mitigation*) dengan meluncurkan kampanye *retargeting* yang agresif, seperti mengirimkan notifikasi *Push/Email* berisi kupon retensi diskon besar[cite: 494, 513].
+  * **Pola:** Pengeluaran finansial sangat rendah (1.337,80 USD) dan paling jarang mengunjungi platform (hanya 1,73 kali).
+  * **Tindak Lanjut Bisnis:** Eksekusi kampanye mitigasi *churn* (pencegahan pelanggan kabur). Kirimkan kampanye pemasaran ulang (*retargeting*), seperti notifikasi *Push* atau Email *newsletter* yang berisi tawaran diskon retensi besar besaran ("Kami Merindukan Anda") untuk menarik mereka kembali ke platform.
 
 ---
 
 ## 🎯 Kesimpulan
-Eksperimen Big Data ini membuktikan bahwa kombinasi pemrosesan ETL yang teroptimasi dan algoritma K-Means dapat mengubah jutaan baris data mentah menjadi keputusan bisnis yang *actionable*. [cite_start]Platform didominasi oleh transaksi elektronik bernilai tinggi yang melonjak pada akhir tahun[cite: 504, 505, 506]. [cite_start]Melalui pengelompokan pelanggan ke dalam 4 profil klasifikasi (VIP, Loyal, Reguler, dan Pasif), manajemen kini memiliki visibilitas data-driven untuk mengalokasikan anggaran pemasaran secara efektif—memaksimalkan keuntungan dari pelanggan setia sekaligus memitigasi kerugian akibat *churn* pada pelanggan pasif[cite: 509, 510, 511, 512, 513].
+Eksperimen arsitektur analitik ini membuktikan bahwa pemrosesan *Big Data* berskala masif dapat ditangani secara efisien melalui integrasi lingkungan Google Colab, *cloud storage*, dan teknik optimasi memori. Platform ini memiliki basis operasional yang kuat pada komoditas elektronik dengan perputaran transaksi yang memuncak pada periode liburan akhir tahun. Melalui pendekatan algoritma K-Means Clustering dengan pengukuran $k=4$, platform kini memiliki visibilitas *data-driven* untuk mengidentifikasi 4 profil konsumen mulai dari Pelanggan VIP hingga Pasif. Hasil segmentasi ini memungkinkan pihak manajemen untuk tidak sekadar menebak tren pasar, melainkan secara presisi mengalokasikan anggaran pemasaran secara efektif—yakni memprioritaskan layanan untuk pelanggan paling menguntungkan (VIP) sembari mencegah kerugian finansial akibat ditinggalkan oleh kelompok pelanggan pasif (*churn*).
