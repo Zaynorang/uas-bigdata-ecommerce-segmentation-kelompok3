@@ -15,6 +15,7 @@ Hasil pembersihan data menghasilkan 2.199.819 baris transaksi siap latih dengan 
 ---
 
 ## ⚙️ Metode (Pipeline Big Data)
+
 ![Flowchart Arsitektur Big Data](assets/flowchart_arsitektur.png)
 
 Tahapan eksperimen dan pemrosesan dalam arsitektur Big Data ini dijalankan menggunakan komputasi awan Google Colab yang diintegrasikan dengan Google Drive.
@@ -38,16 +39,20 @@ Tahapan eksperimen dan pemrosesan dalam arsitektur Big Data ini dijalankan mengg
 
 ### 2. Data Descriptive
 * **Tren Waktu:** Terjadi lonjakan pesanan yang sangat signifikan (menembus 300.000 transaksi) pada bulan ke-11 (November) dan ke-12 (Desember), mengindikasikan tingginya interaksi saat kampanye diskon liburan akhir tahun (*holiday season*).
+  
 ![Distribusi Volume Transaksi](assets/distribusi_transaksi.png)
 
 * **Kategori Produk Dominan:** Tiga komoditas dengan volume penjualan tertinggi secara berturut-turut adalah *electronics* (~700.000 penjualan), *fashion*, dan *home goods*.
+  
 ![Top 10 Kategori](assets/Top10-Kategori.png)
 
 ### 3. Diagnostic & Predictive Modeling
 * **Deteksi Pencilan (Outlier):** Distribusi nominal belanja mayoritas berada di bawah 4.000 USD, namun terdapat transaksi bernilai ekstrem menembus 10.000 USD (indikasi pembelian barang *high-end*). Pencilan ekstrem ini dieliminasi batas batas kuartilnya sebelum pemodelan agar sentroid tidak bergeser secara bias.
+  
 ![Deteksi Outlier](assets/Deteksi-Outlier.png)
 
 * **Evaluasi Model:** Patahan kurva *Elbow Method* melandai drastis pada titik $k=4$, sehingga jumlah klaster optimal ditetapkan 4. Validasi kinerja model K-Means ($k=4$) mencatatkan separasi yang memadai dengan *Silhouette Score* sebesar 0.3389 dan *Davies-Bouldin Index* di angka 1.0496.
+  
 ![Grafik Elbow Method](assets/elbow_method.png)
 
 ---
