@@ -23,7 +23,8 @@ Tahapan eksperimen dan pemrosesan dalam arsitektur Big Data ini dijalankan mengg
 3. **Load:** Pemuatan dan ekspor *DataFrame* bersih ke dalam format `.parquet` di *cloud storage*.
 4. **Exploratory Data Analysis (EDA):** Pembuatan visualisasi univariat, bivariat, dan multivariat (matriks korelasi) untuk mengekstraksi pola awal data transaksi.
 ![Matriks Korelasi](assets/Matriks-Korelasi.png)
-5. **Modeling (K-Means Clustering):** Standardisasi skala fitur numerik menggunakan `StandardScaler`, evaluasi pencarian jumlah klaster optimal melalui *Elbow Method*, dan pelatihan model sentroid K-Means.
+
+6. **Modeling (K-Means Clustering):** Standardisasi skala fitur numerik menggunakan `StandardScaler`, evaluasi pencarian jumlah klaster optimal melalui *Elbow Method*, dan pelatihan model sentroid K-Means.
 
 ---
 
@@ -44,6 +45,7 @@ Tahapan eksperimen dan pemrosesan dalam arsitektur Big Data ini dijalankan mengg
 ### 3. Diagnostic & Predictive Modeling
 * **Deteksi Pencilan (Outlier):** Distribusi nominal belanja mayoritas berada di bawah 4.000 USD, namun terdapat transaksi bernilai ekstrem menembus 10.000 USD (indikasi pembelian barang *high-end*). Pencilan ekstrem ini dieliminasi batas batas kuartilnya sebelum pemodelan agar sentroid tidak bergeser secara bias.
 ![Deteksi Outlier](assets/Deteksi-Outlier.png)
+
 * **Evaluasi Model:** Patahan kurva *Elbow Method* melandai drastis pada titik $k=4$, sehingga jumlah klaster optimal ditetapkan 4. Validasi kinerja model K-Means ($k=4$) mencatatkan separasi yang memadai dengan *Silhouette Score* sebesar 0.3389 dan *Davies-Bouldin Index* di angka 1.0496.
 ![Grafik Elbow Method](assets/elbow_method.png)
 
