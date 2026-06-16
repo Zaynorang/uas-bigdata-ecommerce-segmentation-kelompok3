@@ -22,6 +22,7 @@ Tahapan eksperimen dan pemrosesan dalam arsitektur Big Data ini dijalankan mengg
 2. **Transform (Data Cleansing & Engineering):** Penanganan nilai kosong (*missing values*), eliminasi data ganda, rekayasa fitur waktu dan finansial, serta *downcasting* tipe data untuk optimasi RAM.
 3. **Load:** Pemuatan dan ekspor *DataFrame* bersih ke dalam format `.parquet` di *cloud storage*.
 4. **Exploratory Data Analysis (EDA):** Pembuatan visualisasi univariat, bivariat, dan multivariat (matriks korelasi) untuk mengekstraksi pola awal data transaksi.
+
 ![Matriks Korelasi](assets/Matriks-Korelasi.png)
 
 6. **Modeling (K-Means Clustering):** Standardisasi skala fitur numerik menggunakan `StandardScaler`, evaluasi pencarian jumlah klaster optimal melalui *Elbow Method*, dan pelatihan model sentroid K-Means.
